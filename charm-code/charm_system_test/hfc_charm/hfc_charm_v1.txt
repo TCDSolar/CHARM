@@ -1,0 +1,48 @@
+This set contains the detections produced by CHARM code for the year 2009
+
+Files on this set:
+      	 hfc1test_schema_CHARM.sql
+	 ch_observatory.csv
+	 ch_observation.csv
+	 ch_frc.csv
+	 ch_groups.csv
+	 ch_results.csv
+
+Files description:
+      hfc1test_schema_CHARM.sql:  CHARM schema. CHs schema added to the one from SMART.
+      ch_observatory.csv: file with the data entry for the observatory table. 
+      ch_frc.csv: file with the feature detection code info.
+      ch_observation.csv: file with the fits headers info of the images used.
+      ch_groups.csv: file with the groups of CHs.  Each CH belongs to a group
+      ch_results.csv:  file with the final detections of CHARM
+
+Instructions in MySQL:
+	     /* STEPS!! */
+	     /* drop database hfc1test; /*!!!  Deletes the database!*/
+	     source hfc1test_schema_CHARM.sql;  /*this defines SMART and CHARM tables */
+	     use hfc1test;
+
+	     /*===== LOAD active regions from SMART tables =====*/
+	      load data local infile '../hfc_smart/ar_observatory.csv' into table observatory fields terminated by ';'; 
+	     load data local infile '../hfc_smart/ar_frc.csv' into table FRC_INFO fields terminated by ';' IGNORE 1 LINES; 
+	      load data local infile '../hfc_smart/ar_observation.csv' into table observations fields terminated by ';' IGNORE 1 LINES; 
+	      load data local infile '../hfc_smart/ar_results.csv' into table  ACTIVEREGIONS fields terminated by ';' IGNORE 1 LINES;
+
+	     /*===== LOAD active regions from CHARM tables =====*/
+	     load data local infile 'ch_observatory.csv' into table observatory fields terminated by ';';
+	     load data local infile 'ch_frc.csv' into table FRC_INFO fields terminated by ';' IGNORE 1 LINES;
+	     load data local infile 'ch_observation.csv' into table observations fields terminated by ';' IGNORE 1 LINES;
+	     load data local infile 'ch_groups.csv' into table CHGROUPS fields terminated by ';' IGNORE 1 LINES;
+	     load data local infile 'ch_results.csv' into table  CORONALHOLES fields terminated by ';' IGNORE 1 LINES;
+	     
+
+Date Info:
+     set created  14/Oct/2010	
+     set fixed      15/Oct/2010
+
+Tested  and  when data is loaded doesn't give errors.  However, the
+links are losed.  When loaded charm results it links the table with
+data wrongly, it doesn't change the identifiers.
+
+trying load data with set
+load data local infile 'ch_result2.csv' into table CORONALHOLES (OBSERVATION_ID_EIT, @var1, OBSERVATION_ID_MDI, @var2) set OBSERVATION_ID_EIT = (select ID from observations where observations.filename = @var1) OBSERVATION_ID_MDI = (select ID from observations where observations.filename = @var2) fields terminated by ';' IGNORE 1 LINES ;

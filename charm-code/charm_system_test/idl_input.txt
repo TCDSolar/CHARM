@@ -1,0 +1,12 @@
+;Set output quiet
+!quiet=1
+;Set up IDL paths
+!Path = './idl:' + $
+	'./idl/support_codes:' + $
+	'./idl/support_codes/chaincode:' + $
+	'./idl/support_codes/general:' + $
+	!Path
+
+;example run! the java script will write these two lines
+;stage_charm_arg,'23-apr-1996','01-May-1996',runname='19960423',/grid
+;exit
