@@ -1,7 +1,7 @@
 function copychtogr,chstr,grstr
 	grstr.CHGR_BR_ARC = chstr.ch_br_arc
 	grstr.CHGR_BR_PIX = chstr.CH_BR_PIX
-	grstr.chgr_br_HG_LONLAT_deg_disk   = chstr.ch_br_HG_LONLAT_deg_disk
+	grstr.chgr_br_HG_LATLON_deg_disk   = chstr.ch_br_HG_LATLON_deg_disk
 	grstr.chgr_br_CARR_LONLAT_deg_disk = chstr.ch_br_CARR_LONLAT_deg_disk
 	grstr.CHGR_CBR_ARC = chstr.CHC_ARC
 	grstr.CHGR_CBR_PIX = chstr.CHC_PIX_DISK

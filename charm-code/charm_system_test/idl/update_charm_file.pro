@@ -138,7 +138,7 @@ for i=0,n_elements(s_ch)-1 do begin
    for j=0,3 do begin  & $
       latlon = arcmin2hel(new_s_ch[i].ch_br_arc[indexx[j]]/60.,new_s_ch[i].ch_br_arc[indexy[j]]/60.,date=eit_map_rot.time,/soho)  & $
       new_s_ch[i].ch_br_HG_LATLON_deg_disk[*,j]=latlon  & $
-      car_lonlat = conv_h2c([new_s_ch[i].ch_HG_LATLON_DEG_disk[1,j],new_s_ch[i].ch_HG_LATLON_DEG_disk[0,j]],eit_map_rot.time)  & $
+      car_lonlat = conv_h2c([new_s_ch[i].ch_br_HG_LATLON_DEG_disk[1,j],new_s_ch[i].ch_br_HG_LATLON_DEG_disk[0,j]],eit_map_rot.time)  & $
       new_s_ch[i].ch_br_CARR_LONLAT_deg_disk[*,j]=car_lonlat  & $
    endfor
       
@@ -192,7 +192,7 @@ for i=0,n_elements(s_ch)-1 do begin
 	new_s_ch[i].chc_arc = [newx,newy]
 	new_s_ch[i].chc_latlon_deg_disk = arcmin2hel(newx/60.,newy/60.,date=eit_map_rot.time,/soho)
 	new_s_ch[i].chc_pix_disk = [newx_px,newy_px]
-	new_s_ch[i].chc_carr_disk = conv_h2c([new_s_ch[i].chc_latlon_deg_disk[1],new_s_ch[i].chc_latlon_deg_disk[0]],eit_map_rot.time] 
+	new_s_ch[i].chc_carr_disk = conv_h2c([new_s_ch[i].chc_latlon_deg_disk[1],new_s_ch[i].chc_latlon_deg_disk[0]],eit_map_rot.time) 
 	
 ENDFOR
 ;=========================================================================================
@@ -219,6 +219,7 @@ temp = add_tag(temp,0.,'chGR_lon_width_hg_deg')
 temp = add_tag(temp,0.,'chGR_lat_width_carr_deg')
 temp = add_tag(temp,0.,'chGR_lon_width_carr_deg')
 temp = add_tag(temp,0.,'CHGR_AREA_Deg2')
+temp = add_tag(temp,[0.,0.],'chgr_LATLON_disk',/no_pair)
 new_s_gr = temp
 
 for i=0,n_elements(s_gr)-1 do begin
